@@ -1,6 +1,12 @@
 const fs = require("fs");
 const prompt = require("prompt-sync")();
-var filestemp = fs.readFileSync("test.pte", "utf8");
+try {
+    var filestemp = fs.readFileSync(process.argv[2], "utf8");
+}catch(e){
+    console.log("usage: node index.js [file]");
+    console.log("\ncheck if you typed something wrong and try again");
+    process.exit();
+}
 var files = "";
 var file = filestemp.match(/([A-Z][a-z]?|\(|\)|\[|\]|\}|\{)[0-9]*/g);
 if (file == null) {
